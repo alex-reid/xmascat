@@ -17,6 +17,7 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/animate.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         <script src="//use.typekit.net/tbu7rjw.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
@@ -47,14 +48,15 @@
             <hr>
             <div id="video" class="tk-league-gothic">
                 <?php 
-                    if($name){
-                        echo strtoupper($name);
-                    }
+                    // if($name){
+                    //     echo strtoupper($name);
+                    // }
                 ?>
+                <iframe width="1280" height="720" src="//www.youtube.com/embed/Q04ILDXe3QE?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1" frameborder="0" allowfullscreen=""></iframe>
             </div>
             <hr>
             <form action="http://mccannau.createsend.com/t/j/s/pluiuj/" method="post" id="subForm">
-                <p class="sub"><a href="#" class="tw ir">tw</a><a href="#" class="fb ir">fb</a>THE MORE THE <span class="tk-league-gothic big">MEOWY-IER.</span> WISH SOMEONE ELSE A <span class="tk-league-gothic big">MEOWY CHRISTMAS.</span>
+                <p class="sub"><a href="#" class="tw ir">tw</a><a href="#" class="fb ir">fb</a>THE MORE THE <span class="tk-league-gothic big">MEOWY-ER.</span> WISH SOMEONE ELSE A <span class="tk-league-gothic big">MEOWY CHRISTMAS.</span>
                             <input type="text" name="cm-name" id="name" placeholder="name"/>
                             <input type="text" name="cm-pluiuj-pluiuj" id="aljhk-aljhk" placeholder="email"/>
                             <input type="submit" value="SEND" class="tk-league-gothic big"/>
@@ -63,8 +65,6 @@
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
         <script type="text/javascript">
             $(function () {
@@ -81,6 +81,28 @@
                         }
                     });
                 });
+
+                var flash_count = 0;
+                var anims = ['tada','wobble','rubberBand','tada']
+                function names(){
+                    name = "<?php 
+                                if($name){
+                                    echo strtoupper($name);
+                                }else{
+                                    echo false;
+                                }
+                            ?>";
+                    flash_count ++;
+                    var n = Math.round(Math.random()*2)+1;
+                    var x = Math.round(Math.random()*90);
+                    var y = Math.round(Math.random()*80);
+                    $("#video").prepend('<span class="name tk-league-gothic animated '+anims[n]+'" rel="f_'+flash_count+'" style="top:'+y+'%;left:'+x+'%;font-size:'+n+'em">'+name+'</span>')
+                    var r = $('span[rel="f_'+flash_count+'"]');
+                    setTimeout(function(){r.remove()},500)
+                }
+
+                setInterval(names,1100);
+
             });
         </script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

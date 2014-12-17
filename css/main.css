@@ -130,8 +130,16 @@ hr{
     background: #000;
     width: 1280px;
     height: 720px;
-    line-height: 720px;
-    font-size: 140px;
+    font-size: 40px;
+    position: relative;
+    overflow: hidden;
+}
+#video iframe {
+    z-index: 0;
+}
+#video .name{
+    position: absolute;
+    z-index: 10;
 }
 .tw{
     display: inline-block;
