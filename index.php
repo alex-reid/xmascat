@@ -1,3 +1,6 @@
+<?php 
+    $name = (isset($_GET['name'])) ? $_GET['name'] : false;
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -25,9 +28,30 @@
 
         <!-- Add your site or application content here -->
         <div id="content">
+            <?php 
+                if(!$name){
+            ?>
+                <div id="bgcover">
+                    <div id="noname" class="tk-league-gothic">
+                        <p>PLEASE ENTER YOUR NAME</P>
+                        <form action="" method="get" id="name_form">
+                            <input type="text" name="name" id="name" placeholder="name"/>
+                            <input type="submit" value="GO" class="tk-league-gothic big"/>
+                        </form>
+                    </div>
+                </div>
+            <?php
+                }
+            ?>
             <p>HAVE A <span class="tk-league-gothic big">MEOWY CHRISTMAS</span> McCANN</p>
             <hr>
-            <div id="video"></div>
+            <div id="video" class="tk-league-gothic">
+                <?php 
+                    if($name){
+                        echo strtoupper($name);
+                    }
+                ?>
+            </div>
             <hr>
             <form action="http://mccannau.createsend.com/t/j/s/pluiuj/" method="post" id="subForm">
                 <p class="sub"><a href="#" class="tw ir">tw</a><a href="#" class="fb ir">fb</a>THE MORE THE <span class="tk-league-gothic big">MEOWY-IER.</span> WISH SOMEONE ELSE A <span class="tk-league-gothic big">MEOWY CHRISTMAS.</span>
