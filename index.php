@@ -47,14 +47,16 @@
             <p>HAVE A <span class="tk-league-gothic big">MEOWY CHRISTMAS</span> McCANN</p>
             <hr>
             <div id="video" class="tk-league-gothic">
-                <?php 
-                    // if($name){
-                    //     echo strtoupper($name);
-                    // }
-                ?>
-                <iframe width="1280" height="720" src="//www.youtube.com/embed/kxnpUsqIHlU?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=0" frameborder="0" allowfullscreen=""></iframe>
+                <div class="name"><?php 
+                    if($name){
+                        echo "<span>".strtoupper($name)."</span>";
+                    }
+                ?></div>
+<!--                 <div id="player"></div>
+ -->                <iframe id="player1" src="//player.vimeo.com/video/114835296?api=1&autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             <hr>
+            <span class="status"></span>
             <form action="http://mccannau.createsend.com/t/j/s/pluiuj/" method="post" id="subForm">
                 <p class="sub">
                     <span class="social">
@@ -76,8 +78,12 @@
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+        <script src="//f.vimeocdn.com/js/froogaloop2.min.js"></script>
+        <script src="js/jquery.fittext.js"></script>
         <script type="text/javascript">
+
+
+            var hasname = <?php echo ($name) ? '1' : '0'; ?>;
             $(function () {
                 $('#subForm').submit(function (e) {
                     e.preventDefault();
@@ -96,13 +102,7 @@
                 var flash_count = 0;
                 var anims = ['tada','wobble','rubberBand','tada']
                 function names(){
-                    name = "<?php 
-                                if($name){
-                                    echo strtoupper($name);
-                                }else{
-                                    echo false;
-                                }
-                            ?>";
+                    name = "<?php echo ($name) ? strtoupper($name) : false; ?>";
                     flash_count ++;
                     var n = Math.round(Math.random()*2)+1;
                     var x = Math.round(Math.random()*90);
@@ -111,10 +111,108 @@
                     var r = $('span[rel="f_'+flash_count+'"]');
                     setTimeout(function(){r.remove()},500)
                 }
+                function bigname(){
+                    $(".name").css('visibility','visible')
+                    setTimeout(function(){$(".name").css('visibility','hidden')},1000)
+                }
+                $(".name").bigtext();
 
-                //setInterval(names,1100);
+                setInterval(bigname,5000);
+
+
+
+
+
+
+
+                // vimeo api
+
+                var player = $('iframe');
+                var url = window.location.protocol + player.attr('src').split('?')[0];
+                var status = $('.status');
+
+                // Listen for messages from the player
+                if (window.addEventListener){
+                    window.addEventListener('message', onMessageReceived, false);
+                }
+                else {
+                    window.attachEvent('onmessage', onMessageReceived, false);
+                }
+
+                // Handle messages received from the player
+                function onMessageReceived(e) {
+                    var data = JSON.parse(e.data);
+                    
+                    switch (data.event) {
+                        case 'ready':
+                            onReady();
+                            break;
+                           
+                        case 'playProgress':
+                            onPlayProgress(data.data);
+                            break;
+                            
+                        case 'pause':
+                            onPause();
+                            break;
+                           
+                        case 'finish':
+                            onFinish();
+                            break;
+                    }
+                }
+
+                // Call the API when a button is pressed
+                $('button').on('click', function() {
+                    post($(this).text().toLowerCase());
+                });
+
+                // Helper function for sending a message to the player
+                function post(action, value) {
+                    var data = {
+                      method: action
+                    };
+                    
+                    if (value) {
+                        data.value = value;
+                    }
+                    
+                    var message = JSON.stringify(data);
+                    player[0].contentWindow.postMessage(data, url);
+                }
+
+                function onReady() {
+                    status.text('ready');
+                    
+                    post('addEventListener', 'pause');
+                    post('addEventListener', 'finish');
+                    post('addEventListener', 'playProgress');
+                }
+
+                function onPause() {
+                    status.text('paused');
+                }
+
+                function onFinish() {
+                    status.text('finished');
+                }
+
+                function onPlayProgress(data) {
+                    status.text(data.seconds + 's played');
+                }
+
 
             });
+
+
+
+        </script>
+        <script>
+              var tag = document.createElement('script');
+
+              tag.src = "https://www.youtube.com/iframe_api";
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         </script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
