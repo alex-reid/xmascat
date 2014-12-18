@@ -205,6 +205,15 @@ input[type="submit"]{
     background-color: #c0081f;
     margin: 120px auto;
 }
+#noname p{
+    font-size: 1.8em;
+    line-height: 1em;
+    padding-top: 30px;
+}
+.mcclogo{
+    margin: 40px 0;
+    display: block;
+}
 
 /* media queries - .5625 scale for vid */
 @media only screen and (max-width: 1280px) {

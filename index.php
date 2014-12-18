@@ -1,5 +1,6 @@
 <?php 
     $name = (isset($_GET['name'])) ? $_GET['name'] : false;
+    $play = (isset($_GET['name'])) ? '&autoplay=1' : '';
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -13,11 +14,32 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+        <meta property="og:image" content="http://mccannchristmascat.com/fb-share.jpg"/>
+        <meta property="og:title" content="McCann Christmas Cat"/>
+        <meta property="og:url" content="http://mccannchristmascat.com/"/>
+        <meta property="og:site_name" content="McCann Christmas Cat"/>
+        <meta property="og:type" content="Website"/>
+        <meta property="og:description" content="People love cat videos and Xmas. Finally, the two have been combined... Watch and give someone a Meowy Christmas!" />
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/animate.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         <script src="//use.typekit.net/tbu7rjw.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
@@ -53,13 +75,13 @@
                     }
                 ?></div>
 <!--                 <div id="player"></div>
- -->                <iframe id="player1" src="//player.vimeo.com/video/114835296?api=1&autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ -->                <iframe id="player1" src="//player.vimeo.com/video/114835296?api=1<?php echo $play ?>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             <hr>
             <form action="http://mccannau.createsend.com/t/j/s/pluiuj/" method="post" id="subForm">
                 <p class="sub">
                     <span class="social">
-                        <a href="#" class="tw ir">tw</a><a href="#" class="fb ir">fb</a>
+                        <a href="https://twitter.com/share/?text=People%20love%20cat%20videos%20and%20Xmas.%20Finally%2C%20the%20two%20have%20been%20combined...%20Watch%20and%20give%20someone%20a%20Meowy%20Christmas!%20http%3A%2F%2Fbit.ly%2F13e7FjD" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="tw ir">tw</a><a href="https://www.facebook.com/sharer/sharer.php?u=http://mccannchristmascat.com/?name=<?php echo $name; ?>" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="fb ir">fb</a>
                     </span>
                     <span class="l1">
                         THE MORE THE
@@ -74,7 +96,8 @@
                     </span>
                 </p>
             </form>
-            <div class="status"></div>
+            <div class="form_feedback"></div>
+            <a class="mcclogo" href="http://mccann.com.au" target="_blank"><img src="img/mccann.png" width="120"/></a>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
@@ -91,9 +114,9 @@
                     $(this).serialize(),
                     function (data) {
                         if (data.Status === 400) {
-                            alert("Error: " + data.Message);
+                            $('.form_feedback').html(data.Message);
                         } else { // 200
-                            alert("Success: " + data.Message);
+                            $('.form_feedback').html(data.Message);
                         }
                     });
                 });
@@ -224,13 +247,6 @@
 
 
         </script>
-        <script>
-              var tag = document.createElement('script');
-
-              tag.src = "https://www.youtube.com/iframe_api";
-              var firstScriptTag = document.getElementsByTagName('script')[0];
-              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        </script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -238,7 +254,7 @@
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
+            ga('create','UA-57794328-1','auto');ga('send','pageview');
         </script>
     </body>
 </html>
