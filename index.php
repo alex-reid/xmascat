@@ -98,25 +98,32 @@
                     });
                 });
 
-                var flash_count = 0;
-                var anims = ['tada','wobble','rubberBand','tada']
-                function names(){
-                    name = "<?php echo ($name) ? strtoupper($name) : false; ?>";
-                    flash_count ++;
-                    var n = Math.round(Math.random()*2)+1;
-                    var x = Math.round(Math.random()*90);
-                    var y = Math.round(Math.random()*80);
-                    $("#video").prepend('<span class="name tk-league-gothic animated '+anims[n]+'" rel="f_'+flash_count+'" style="top:'+y+'%;left:'+x+'%;font-size:'+n+'em">'+name+'</span>')
-                    var r = $('span[rel="f_'+flash_count+'"]');
-                    setTimeout(function(){r.remove()},500)
-                }
+                // var flash_count = 0;
+                // var anims = ['tada','wobble','rubberBand','tada']
+                // function names(){
+                //     name = "<?php echo ($name) ? strtoupper($name) : false; ?>";
+                //     flash_count ++;
+                //     var n = Math.round(Math.random()*2)+1;
+                //     var x = Math.round(Math.random()*90);
+                //     var y = Math.round(Math.random()*80);
+                //     $("#video").prepend('<span class="name tk-league-gothic animated '+anims[n]+'" rel="f_'+flash_count+'" style="top:'+y+'%;left:'+x+'%;font-size:'+n+'em">'+name+'</span>')
+                //     var r = $('span[rel="f_'+flash_count+'"]');
+                //     setTimeout(function(){r.remove()},500)
+                // }
+
+                var play;
                 function bigname(){
                     $(".name").bigtext();
                     $(".name").css('visibility','visible')
-                    setTimeout(function(){$(".name").css('visibility','hidden')},1000)
+                    setTimeout(function(){$(".name").css('visibility','hidden')},500)
                 }
 
-                setInterval(bigname,5000);
+                function go(){
+                    play = setInterval(bigname,5000);
+                }
+                function stop(){
+                    clearInterval(play);
+                }
 
 
 
@@ -126,7 +133,7 @@
 
                 // vimeo api
 
-                /*
+                
                 var player = $('iframe');
                 var url = window.location.protocol + player.attr('src').split('?')[0];
                 var status = $('.status');
@@ -146,6 +153,10 @@
                     switch (data.event) {
                         case 'ready':
                             onReady();
+                            break;
+                           
+                        case 'play':
+                            onPlay();
                             break;
                            
                         case 'playProgress':
@@ -184,23 +195,28 @@
                 function onReady() {
                     status.text('ready');
                     
+                    post('addEventListener', 'play');
                     post('addEventListener', 'pause');
                     post('addEventListener', 'finish');
                     post('addEventListener', 'playProgress');
                 }
 
+                function onPlay() {
+                    go();
+                }
+
                 function onPause() {
-                    status.text('paused');
+                    stop();
                 }
 
                 function onFinish() {
-                    status.text('finished');
+                    stop();
                 }
 
                 function onPlayProgress(data) {
-                    status.text(data.seconds + 's played');
+                    if(data.seconds > 42) stop();
                 }
-                */
+                
 
 
             });
