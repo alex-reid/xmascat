@@ -52,14 +52,25 @@
                     //     echo strtoupper($name);
                     // }
                 ?>
-                <iframe width="1280" height="720" src="//www.youtube.com/embed/Q04ILDXe3QE?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1" frameborder="0" allowfullscreen=""></iframe>
+                <iframe width="1280" height="720" src="//www.youtube.com/embed/kxnpUsqIHlU?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=0" frameborder="0" allowfullscreen=""></iframe>
             </div>
             <hr>
             <form action="http://mccannau.createsend.com/t/j/s/pluiuj/" method="post" id="subForm">
-                <p class="sub"><a href="#" class="tw ir">tw</a><a href="#" class="fb ir">fb</a>THE MORE THE <span class="tk-league-gothic big">MEOWY-ER.</span> WISH SOMEONE ELSE A <span class="tk-league-gothic big">MEOWY CHRISTMAS.</span>
-                            <input type="text" name="cm-name" id="name" placeholder="name"/>
-                            <input type="text" name="cm-pluiuj-pluiuj" id="aljhk-aljhk" placeholder="email"/>
-                            <input type="submit" value="SEND" class="tk-league-gothic big"/>
+                <p class="sub">
+                    <span class="social">
+                        <a href="#" class="tw ir">tw</a><a href="#" class="fb ir">fb</a>
+                    </span>
+                    <span class="l1">
+                        THE MORE THE
+                    </span> 
+                    <span class="l2 tk-league-gothic big">MEOWY-ER.</span> 
+                    <span class="l3">WISH SOMEONE ELSE A</span> 
+                    <span class="tk-league-gothic big">MEOWY CHRISTMAS.</span>
+                    <span class="form">
+                        <input type="text" name="cm-name" id="name" placeholder="name"/>
+                        <input type="text" name="cm-pluiuj-pluiuj" id="aljhk-aljhk" placeholder="email"/>
+                        <input type="submit" value="SEND" class="tk-league-gothic big"/>
+                    </span>
                 </p>
             </form>
         </div>
@@ -101,7 +112,7 @@
                     setTimeout(function(){r.remove()},500)
                 }
 
-                setInterval(names,1100);
+                //setInterval(names,1100);
 
             });
         </script>
