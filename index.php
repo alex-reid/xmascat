@@ -56,7 +56,6 @@
  -->                <iframe id="player1" src="//player.vimeo.com/video/114835296?api=1&autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             <hr>
-            <span class="status"></span>
             <form action="http://mccannau.createsend.com/t/j/s/pluiuj/" method="post" id="subForm">
                 <p class="sub">
                     <span class="social">
@@ -75,10 +74,10 @@
                     </span>
                 </p>
             </form>
+            <div class="status"></div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="//f.vimeocdn.com/js/froogaloop2.min.js"></script>
         <script src="js/jquery.fittext.js"></script>
         <script type="text/javascript">
 
@@ -112,10 +111,10 @@
                     setTimeout(function(){r.remove()},500)
                 }
                 function bigname(){
+                    $(".name").bigtext();
                     $(".name").css('visibility','visible')
                     setTimeout(function(){$(".name").css('visibility','hidden')},1000)
                 }
-                $(".name").bigtext();
 
                 setInterval(bigname,5000);
 
@@ -127,6 +126,7 @@
 
                 // vimeo api
 
+                /*
                 var player = $('iframe');
                 var url = window.location.protocol + player.attr('src').split('?')[0];
                 var status = $('.status');
@@ -200,6 +200,7 @@
                 function onPlayProgress(data) {
                     status.text(data.seconds + 's played');
                 }
+                */
 
 
             });
